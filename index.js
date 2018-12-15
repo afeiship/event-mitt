@@ -20,8 +20,7 @@ var EventEmitter = {
     var _listeners = listeners.slice(0);
     if (inHandler) {
       for (var i = 0; i < _listeners.length; i++) {
-        var listener = _listeners[i];
-        if (listener === inHandler) {
+        if (_listeners[i] === inHandler) {
           listeners.splice(i, 1);
         }
       }
