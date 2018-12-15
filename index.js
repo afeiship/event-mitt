@@ -1,5 +1,4 @@
 var global = global || this || window || Function('return this')();
-var SLICE = Array.prototype.slice;
 var EventEmitter = {
   on: function(inName, inHandler) {
     var self = this;
@@ -33,7 +32,7 @@ var EventEmitter = {
     if (inName in map === false) return;
 
     var listeners = map[inName];
-    var args = SLICE.call(arguments, 1);
+    var args = [].slice.call(arguments, 1);
     if (listeners && listeners.length > 0) {
       for (var i = 0; i < listeners.length; i++) {
         if (listeners[i].apply(null, args) === false) {
