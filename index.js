@@ -31,8 +31,8 @@ var EventMitt = {
     var map = (this._events = this._events || {});
     if (inName in map === false) return;
 
-    var listeners = map[inName] || [];
-    var listenersAll = map['*'] || [];
+    var listeners = (map[inName] || []).slice();
+    var listenersAll = (map['*'] || []).slice();
     var args = [].slice.call(arguments, 1);
     if (inName !== '*') {
       for (var i = 0; i < listeners.length; i++) {
@@ -40,6 +40,7 @@ var EventMitt = {
           break;
         }
       }
+      listeners.slice();
     }
 
     // emit `*` listeners:
