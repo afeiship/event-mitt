@@ -30,10 +30,10 @@ var EventMitt = {
   emit: function(inName /* , args... */) {
     var map = (this._events = this._events || {});
     if (inName in map === false) return;
-
-    var listeners = (map[inName] || []).slice();
-    var listenersAll = (map['*'] || []).slice();
-    var args = [].slice.call(arguments, 1);
+    var ARRAY = [];
+    var listeners = (map[inName] || ARRAY).slice();
+    var listenersAll = (map['*'] || ARRAY).slice();
+    var args = ARRAY.slice.call(arguments, 1);
     if (inName !== '*') {
       for (var i = 0; i < listeners.length; i++) {
         if (listeners[i].apply(null, args) === false) {
