@@ -12,10 +12,14 @@
 + https://github.com/developit/mitt
 + https://github.com/jeromeetienne/microevent.js/blob/master/microevent.js
 
+## install:
+```shell
+npm install -S afeiship/event-mitt --registry=https://registry.npm.taobao.org
+```
 
 ## usage:
 ```js
-import EventMitt from '';
+import EventMitt from 'event-mitt';
 var Person = class { };
 Object.assign(Person.prototype, EventMitt);
 var p1 = new Person();
