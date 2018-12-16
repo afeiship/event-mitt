@@ -40,7 +40,6 @@ var EventMitt = {
           break;
         }
       }
-      listeners.slice();
     }
 
     // emit `*` listeners:

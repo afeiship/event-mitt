@@ -1,6 +1,6 @@
 var EventMitt = require('../index');
 test('* listners', () => {
-  var Person = class { };
+  var Person = class {};
   Object.assign(Person.prototype, EventMitt);
   var p1 = new Person();
   var sum = 0;
