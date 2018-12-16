@@ -26,7 +26,8 @@ test('* listners', () => {
   p1.emit('ev1');
   p1.emit('ev2');
   p1.emit('ev3');
+  p1.emit('*');
 
   expect(sum).toBe(9);
-  expect(total).toBe(3);
+  expect(total).toBe(4);
 });
