@@ -27,17 +27,15 @@ var EventMitt = {
       listeners.length = 0;
     }
   },
-  emit: function(inName /* , args... */) {
+  emit: function(inName, inData) {
     var map = (this._events = this._events || {});
     if (inName in map === false) return;
 
-    var ARRAY = [];
-    var listeners = (map[inName] || ARRAY).slice();
-    var listenersAll = (map['*'] || ARRAY).slice();
-    var args = ARRAY.slice.call(arguments, 1);
+    var listeners = (map[inName] || []).slice();
+    var listenersAll = (map['*'] || []).slice();
     if (inName !== '*') {
       for (var i = 0; i < listeners.length; i++) {
-        if (listeners[i].apply(null, args) === false) {
+        if (listeners[i](inData) === false) {
           break;
         }
       }
@@ -45,7 +43,7 @@ var EventMitt = {
 
     // emit `*` listeners:
     for (var j = 0; j < listenersAll.length; j++) {
-      if (listenersAll[j].apply(null, arguments) === false) {
+      if (listenersAll[j](inName, inData) === false) {
         break;
       }
     }
