@@ -31,13 +31,21 @@ var EventEmitter = {
     var map = (this._events = this._events || {});
     if (inName in map === false) return;
 
-    var listeners = map[inName];
+    var listeners = map[inName] || [];
+    var listenersAll = map['*'] || [];
     var args = [].slice.call(arguments, 1);
-    if (listeners && listeners.length > 0) {
+    if (inName !== '*') {
       for (var i = 0; i < listeners.length; i++) {
         if (listeners[i].apply(null, args) === false) {
           break;
         }
+      }
+    }
+
+    // emit `*` listeners:
+    for (var j = 0; j < listenersAll.length; j++) {
+      if (listenersAll[j].apply(null, arguments) === false) {
+        break;
       }
     }
   }
