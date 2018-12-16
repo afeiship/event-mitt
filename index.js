@@ -30,6 +30,7 @@ var EventMitt = {
   emit: function(inName /* , args... */) {
     var map = (this._events = this._events || {});
     if (inName in map === false) return;
+
     var ARRAY = [];
     var listeners = (map[inName] || ARRAY).slice();
     var listenersAll = (map['*'] || ARRAY).slice();
