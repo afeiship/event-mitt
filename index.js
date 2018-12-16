@@ -1,5 +1,5 @@
 var global = global || this || window || Function('return this')();
-var EventEmitter = {
+var EventMitt = {
   on: function(inName, inHandler) {
     var self = this;
     var map = (this._events = this._events || {});
@@ -52,13 +52,13 @@ var EventEmitter = {
 };
 
 if (typeof module !== 'undefined' && module.exports) {
-  module.exports = EventEmitter;
+  module.exports = EventMitt;
 } else {
   if (typeof define === 'function' && define.amd) {
     define([], function() {
-      return EventEmitter;
+      return EventMitt;
     });
   } else {
-    global.EventEmitter = EventEmitter;
+    global.EventMitt = EventMitt;
   }
 }
