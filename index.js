@@ -31,22 +31,17 @@ var EventMitt = {
     var map = (this._events = this._events || {});
     if (inName in map === false) return;
 
-    var listeners = (map[inName] || []).slice();
-    var listenersAll = (map['*'] || []).slice();
-    if (inName !== '*') {
+    var dispatch = function(inType) {
+      var listeners = (map[inType] || []).slice();
+      var args = inType === '*' ? [inName, inData] : [inData];
       for (var i = 0; i < listeners.length; i++) {
-        if (listeners[i](inData) === false) {
+        if (listeners[i].apply(null, args) === false) {
           break;
         }
       }
-    }
-
-    // emit `*` listeners:
-    for (var j = 0; j < listenersAll.length; j++) {
-      if (listenersAll[j](inName, inData) === false) {
-        break;
-      }
-    }
+    };
+    inName !== '*' && dispatch(inName);
+    dispatch('*');
   }
 };
 
