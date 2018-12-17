@@ -40,8 +40,7 @@ var EventMitt = {
         }
       }
     };
-    inName !== '*' && dispatch(inName);
-    dispatch('*');
+    inName !== '*' && dispatch(inName), dispatch('*');
   }
 };
 
