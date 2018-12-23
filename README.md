@@ -20,29 +20,32 @@ npm install -S afeiship/event-mitt --registry=https://registry.npm.taobao.org
 ## usage:
 ```js
 import EventMitt from 'event-mitt';
-var Person = class { };
+const Person = class { };
 Object.assign(Person.prototype, EventMitt);
-var p1 = new Person();
-var sum = 0;
-var total = 0;
-var res1 = p1.on('ev1', () => {
+const p1 = new Person();
+const sum = 0;
+const total = 0;
+
+// attach events:
+p1.on('ev1', () => {
   console.log('ev1', sum);
   sum = sum + 1;
 });
-var res2 = p1.on('ev2', () => {
+p1.on('ev2', () => {
   console.log('ev2', sum);
   sum = sum + 3;
 });
-var res3 = p1.on('ev3', () => {
+p1.on('ev3', () => {
   console.log('ev3', sum);
   sum = sum + 5;
 });
 
-var resTotal = p1.on('*', (name) => {
+p1.on('*', (name) => {
   console.log('just a log', name);
   total++;
 });
 
+// emit events:
 p1.emit('ev1');
 p1.emit('ev2');
 p1.emit('ev3');
