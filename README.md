@@ -8,6 +8,7 @@
 | off  | name,handler                    | unregister an event                  |
 | emit | name,data( recommend an object) | fire an event                        |
 | one  | name,data( recommend an object) | fire an event,only can register once |
+| once | name,data( recommend an object) | fire an event,only can execute once  |
 
 ## resouces:
 + https://github.com/developit/mitt
