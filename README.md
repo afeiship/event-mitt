@@ -2,11 +2,12 @@
 > A mini and light event emitter
 
 ## apis:
-| name | args                            | description         |
-|------|---------------------------------|---------------------|
-| on   | name/*,handler                  | register an event   |
-| off  | name,handler                    | unregister an event |
-| emit | name,data( recommend an object) | fire an event       |
+| name | args                            | description                          |
+|------|---------------------------------|--------------------------------------|
+| on   | name/*,handler                  | register an event                    |
+| off  | name,handler                    | unregister an event                  |
+| emit | name,data( recommend an object) | fire an event                        |
+| one  | name,data( recommend an object) | fire an event,only can register once |
 
 ## resouces:
 + https://github.com/developit/mitt
