@@ -41,6 +41,12 @@ var EventMitt = {
       }
     };
     inName !== '*' && dispatch(inName), dispatch('*');
+  },
+  one: function(inName, inHandler) {
+    var map = (this._events = this._events || {});
+    if (!map[inName]) {
+      return this.on(inName, inHandler);
+    }
   }
 };
 
