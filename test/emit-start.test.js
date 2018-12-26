@@ -31,3 +31,19 @@ test('* listners', () => {
   expect(sum).toBe(9);
   expect(total).toBe(4);
 });
+
+test('not register but can subscribe by *', () => {
+  var Person = class {};
+  Object.assign(Person.prototype, EventMitt);
+  var p1 = new Person();
+  var total = 0;
+
+  p1.on('*', (name) => {
+    console.log('just a log', name);
+    total++;
+  });
+
+  p1.emit('test-event', { data: '111' });
+
+  expect(total).toBe(1);
+});

@@ -29,8 +29,6 @@ var EventMitt = {
   },
   emit: function(inName, inData) {
     var map = (this._events = this._events || {});
-    if (inName in map === false) return;
-
     var dispatch = function(inType) {
       var listeners = (map[inType] || []).slice();
       var args = inType === '*' ? [inName, inData] : [inData];
