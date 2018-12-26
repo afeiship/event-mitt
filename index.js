@@ -35,8 +35,13 @@ var EventMitt = {
       var listeners = (map[inType] || []).slice();
       var args = inType === '*' ? [inName, inData] : [inData];
       for (var i = 0; i < listeners.length; i++) {
-        if (listeners[i].apply(null, args) === false) {
+        var handler = listeners[i];
+        if (handler.apply(null, args) === false) {
           break;
+        }
+
+        if (handler.__once__) {
+          this.off(inName, handler);
         }
       }
     };
@@ -47,6 +52,10 @@ var EventMitt = {
     if (!map[inName]) {
       return this.on(inName, inHandler);
     }
+  },
+  once: function(inName, inHandler) {
+    inHandler.__once__ = true;
+    return this.on(inName, inHandler);
   }
 };
 
