@@ -47,7 +47,8 @@ var EventMitt = {
   },
   one: function(inName, inHandler) {
     var map = (this._events = this._events || {});
-    if (!map[inName]) {
+    var evtMap = map[inName];
+    if (!evtMap || !evtMap._events.length) {
       return this.on(inName, inHandler);
     }
   },
