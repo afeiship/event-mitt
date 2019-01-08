@@ -13,6 +13,7 @@
 ## resouces:
 + https://github.com/developit/mitt
 + https://github.com/jeromeetienne/microevent.js/blob/master/microevent.js
++ https://github.com/Wikiki/bulma-accordion/blob/master/src/js/events.js
 
 ## install:
 ```shell
