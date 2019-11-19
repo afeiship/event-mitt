@@ -10,17 +10,17 @@
 | one  | name,data( recommend an object) | fire an event,only can register once |
 | once | name,data( recommend an object) | fire an event,only can execute once  |
 
-## resouces:
+## resources
 + https://github.com/developit/mitt
 + https://github.com/jeromeetienne/microevent.js/blob/master/microevent.js
 + https://github.com/Wikiki/bulma-accordion/blob/master/src/js/events.js
 
-## install:
+## resources
 ```shell
 npm install -S @feizheng/event-mitt
 ```
 
-## usage:
+## usage
 ```js
 import EventMitt from '@feizheng/event-mitt';
 const Person = class { };
@@ -34,10 +34,12 @@ p1.on('ev1', () => {
   console.log('ev1', sum);
   sum = sum + 1;
 });
+
 p1.on('ev2', () => {
   console.log('ev2', sum);
   sum = sum + 3;
 });
+
 p1.on('ev3', () => {
   console.log('ev3', sum);
   sum = sum + 5;
