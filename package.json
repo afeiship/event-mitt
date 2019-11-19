@@ -1,6 +1,6 @@
 {
-  "name": "event-mitt",
-  "version": "1.0.0",
+  "name": "@feizheng/event-mitt",
+  "version": "1.1.0",
   "description": "A mini and light event emitter",
   "homepage": "https://github.com/afeiship/event-mitt",
   "author": {
@@ -15,5 +15,8 @@
   "devDependencies": {
     "jest": "^23.6.0",
     "next-key-map": "github:afeiship/next-key-map"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
   }
 }
