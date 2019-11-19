@@ -17,12 +17,12 @@
 
 ## install:
 ```shell
-npm install -S afeiship/event-mitt --registry=https://registry.npm.taobao.org
+npm install -S @feizheng/event-mitt
 ```
 
 ## usage:
 ```js
-import EventMitt from 'event-mitt';
+import EventMitt from '@feizheng/event-mitt';
 const Person = class { };
 Object.assign(Person.prototype, EventMitt);
 const p1 = new Person();
