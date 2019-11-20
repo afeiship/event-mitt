@@ -9,7 +9,8 @@
   },
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "trypublish": "npm publish --access=public || true"
   },
   "license": "MIT",
   "devDependencies": {
