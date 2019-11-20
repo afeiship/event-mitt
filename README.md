@@ -15,7 +15,7 @@
 + https://github.com/jeromeetienne/microevent.js/blob/master/microevent.js
 + https://github.com/Wikiki/bulma-accordion/blob/master/src/js/events.js
 
-## resources
+## installation
 ```shell
 npm install -S @feizheng/event-mitt
 ```
