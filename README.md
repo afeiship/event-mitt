@@ -1,7 +1,7 @@
 # event-mitt
 > A mini and light event emitter
 
-## apis:
+## apis
 | name | args                            | description                          |
 |------|---------------------------------|--------------------------------------|
 | on   | name/*,handler                  | register an event                    |
