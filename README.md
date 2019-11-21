@@ -10,11 +10,6 @@
 | one  | name,data( recommend an object) | fire an event,only can register once |
 | once | name,data( recommend an object) | fire an event,only can execute once  |
 
-## resources
-+ https://github.com/developit/mitt
-+ https://github.com/jeromeetienne/microevent.js/blob/master/microevent.js
-+ https://github.com/Wikiki/bulma-accordion/blob/master/src/js/events.js
-
 ## installation
 ```shell
 npm install -S @feizheng/event-mitt
@@ -55,3 +50,8 @@ p1.emit('ev1');
 p1.emit('ev2');
 p1.emit('ev3');
 ```
+
+## resources
++ https://github.com/developit/mitt
++ https://github.com/jeromeetienne/microevent.js/blob/master/microevent.js
++ https://github.com/Wikiki/bulma-accordion/blob/master/src/js/events.js
