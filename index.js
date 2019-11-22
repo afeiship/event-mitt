@@ -1,4 +1,5 @@
 var global = global || this || window || Function('return this')();
+
 var EventMitt = {
   on: function(inName, inHandler) {
     var self = this;
