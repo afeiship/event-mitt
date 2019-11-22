@@ -1,6 +1,6 @@
 {
   "name": "@feizheng/event-mitt",
-  "version": "1.1.4",
+  "version": "1.1.5",
   "description": "A mini and light event emitter",
   "homepage": "https://github.com/afeiship/event-mitt",
   "author": {
@@ -9,8 +9,7 @@
   },
   "main": "index.js",
   "scripts": {
-    "test": "jest",
-    "trypublish": "npm publish --access=public || true"
+    "test": "jest"
   },
   "license": "MIT",
   "devDependencies": {
