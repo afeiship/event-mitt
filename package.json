@@ -1,13 +1,13 @@
 {
   "name": "@feizheng/event-mitt",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "A mini and light event emitter",
   "homepage": "https://github.com/afeiship/event-mitt",
   "author": {
     "name": "afei",
     "email": "1290657123@qq.com"
   },
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
     "test": "jest",
     "build": "gulp"
