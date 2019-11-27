@@ -1,5 +1,5 @@
-var EventMitt = require('../index');
-var nxKeyMap = require('next-key-map');
+var EventMitt = require('../dist/index');
+var nxKeyMap = require('@feizheng/next-key-map');
 
 test('* listners', () => {
   var Person = class {};

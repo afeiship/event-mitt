@@ -1,5 +1,12 @@
-var global = global || this || window || Function('return this')();
-
+;(function(root, factory) {
+  if (typeof define === 'function' && define.amd) {
+    define([], factory);
+  } else if (typeof exports === 'object') {
+    module.exports = factory();
+  } else {
+    root.EventMitt = factory();
+  }
+}(this, function() {
 var EventMitt = {
   on: function(inName, inHandler) {
     var self = this;
@@ -59,14 +66,5 @@ var EventMitt = {
   }
 };
 
-if (typeof module !== 'undefined' && module.exports) {
-  module.exports = EventMitt;
-} else {
-  if (typeof define === 'function' && define.amd) {
-    define([], function() {
-      return EventMitt;
-    });
-  } else {
-    global.EventMitt = EventMitt;
-  }
-}
+return EventMitt;
+}));

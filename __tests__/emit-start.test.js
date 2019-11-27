@@ -1,4 +1,4 @@
-var EventMitt = require('../index');
+var EventMitt = require('../dist/index');
 test('* listners', () => {
   var Person = class {};
   Object.assign(Person.prototype, EventMitt);
