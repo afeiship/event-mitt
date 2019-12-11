@@ -8,18 +8,18 @@
   }
 }(this, function() {
 var EventMitt = {
-  on: function(inName, inHandler) {
+  on: function (inName, inHandler) {
     var self = this;
     var map = (this._events = this._events || {});
     var listeners = (map[inName] = map[inName] || []);
     listeners.push(inHandler);
     return {
-      destroy: function() {
+      destroy: function () {
         self.off(inName, inHandler);
       }
     };
   },
-  off: function(inName, inHandler) {
+  off: function (inName, inHandler) {
     var map = (this._events = this._events || {});
     if (inName in map === false) return;
 
@@ -35,9 +35,10 @@ var EventMitt = {
       listeners.length = 0;
     }
   },
-  emit: function(inName, inData) {
+  emit: function (inName, inData) {
     var map = (this._events = this._events || {});
-    var dispatch = function(inType) {
+    var self = this;
+    var dispatch = function (inType) {
       var listeners = (map[inType] || []).slice();
       var args = inType === '*' ? [inName, inData] : [inData];
       for (var i = 0; i < listeners.length; i++) {
@@ -47,20 +48,20 @@ var EventMitt = {
         }
 
         if (handler.__once__) {
-          this.off(inName, handler);
+          self.off(inName, handler);
         }
       }
     };
     inName !== '*' && dispatch(inName), dispatch('*');
   },
-  one: function(inName, inHandler) {
+  one: function (inName, inHandler) {
     var map = (this._events = this._events || {});
     var evtMap = map[inName];
     if (!evtMap || !evtMap.length) {
       return this.on(inName, inHandler);
     }
   },
-  once: function(inName, inHandler) {
+  once: function (inName, inHandler) {
     inHandler.__once__ = true;
     return this.on(inName, inHandler);
   }
