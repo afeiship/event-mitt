@@ -9,10 +9,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
-    - uses: actions/setup-node@v1
-      with:
-        node-version: 12
-        registry-url: https://registry.npmjs.org/
     - run: npm version patch --no-git-tag-version
     - uses: github-actions-x/commit@v2.6
         with:
@@ -20,6 +16,10 @@ jobs:
           push-branch: master
           commit-message: 'chore: auto commit by version patched.'
           rebase: 'true' # pull abd rebase before commit
+    - uses: actions/setup-node@v1
+      with:
+        node-version: 12
+        registry-url: https://registry.npmjs.org/
     - run: npm install
     - run: npm run build
     - run: npm publish --access public
