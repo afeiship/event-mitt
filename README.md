@@ -25,7 +25,7 @@ const sum = 0;
 const total = 0;
 
 // attach events:
-p1.on('ev1', () => {
+var res = p1.on('ev1', () => {
   console.log('ev1', sum);
   sum = sum + 1;
 });
@@ -49,6 +49,9 @@ p1.on('*', (name) => {
 p1.emit('ev1');
 p1.emit('ev2');
 p1.emit('ev3');
+
+// destory:
+res.destroy();
 ```
 
 ## resources
