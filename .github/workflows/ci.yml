@@ -18,7 +18,7 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           push-branch: master
-          commit-message: '${{ matrix.node-version }} auto commit by github actions.'
+          commit-message: 'chore: auto commit by version patched.'
           rebase: 'true' # pull abd rebase before commit
     - run: npm install
     - run: npm run build
