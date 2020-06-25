@@ -1,6 +1,6 @@
 {
   "name": "@feizheng/event-mitt",
-  "version": "2.0.6",
+  "version": "2.0.7",
   "description": "A mini and light event emitter",
   "homepage": "https://github.com/afeiship/event-mitt",
   "author": {
