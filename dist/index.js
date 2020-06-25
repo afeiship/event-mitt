@@ -7,6 +7,15 @@
     root.EventMitt = factory();
   }
 }(this, function() {
+/*!
+ * name: @feizheng/event-mitt
+ * description: A mini and light event emitter
+ * homepage: https://github.com/afeiship/event-mitt
+ * version: 2.0.5
+ * date: 2020-06-25T07:44:51.232Z
+ * license: MIT
+ */
+
 var EventMitt = {
   on: function (inName, inHandler) {
     var self = this;

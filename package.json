@@ -1,6 +1,6 @@
 {
   "name": "@feizheng/event-mitt",
-  "version": "2.0.4",
+  "version": "2.0.5",
   "description": "A mini and light event emitter",
   "homepage": "https://github.com/afeiship/event-mitt",
   "author": {
@@ -14,6 +14,7 @@
   },
   "license": "MIT",
   "devDependencies": {
+    "@feizheng/gulp-pkg-header": "^1.0.4",
     "@feizheng/next-key-map": "^1.0.0",
     "@feizheng/rake-git": "^1.2.1",
     "del": "^5.1.0",

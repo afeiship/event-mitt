@@ -1,4 +1,4 @@
-name: npm-publish
+name: ci
 on:
   push:
     branches:
@@ -13,7 +13,13 @@ jobs:
       with:
         node-version: 12
         registry-url: https://registry.npmjs.org/
+    uses: pascalgn/npm-publish-action@4f4bf159e299f65d21cd1cbd96fc5d53228036df
+      with: # All of theses inputs are optional
+        tag_name: "v%s"
+        tag_message: "v%s"
+        commit_pattern: "^Release (\\S+)"
     - run: npm install
     - run: npm publish --access public
       env:
         NODE_AUTH_TOKEN: ${{secrets.NPM_AUTH_TOKEN}}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Leave this as is, it's automatically generated
