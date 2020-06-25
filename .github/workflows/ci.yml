@@ -13,6 +13,13 @@ jobs:
       with:
         node-version: 12
         registry-url: https://registry.npmjs.org/
+    - run: npm version patch --no-git-tag-version
+    - uses: github-actions-x/commit@v2.6
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          push-branch: master
+          commit-message: '${{ matrix.node-version }} adds auto-generated benchmarks and bar graph'
+          rebase: 'true' # pull abd rebase before commit
     - run: npm install
     - run: npm run build
     - run: npm publish --access public
