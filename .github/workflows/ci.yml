@@ -14,8 +14,11 @@ jobs:
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
         push-branch: master
+        force-add: 'true'
         commit-message: 'chore: auto commit by version patched.'
         rebase: 'true' # pull abd rebase before commit
+        name: afeiship
+        email: 1290657123@qq.com
     - uses: actions/setup-node@v1
       with:
         node-version: 12
