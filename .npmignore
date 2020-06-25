@@ -6,6 +6,7 @@ test
 src
 build
 gulpfile.js
+docs
 
 .github
 __tests__
