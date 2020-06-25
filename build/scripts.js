@@ -10,8 +10,8 @@
   gulp.task('scripts', function() {
     return gulp
       .src(['src/index.js'], { allowEmpty: true })
-      .pipe($.feizheng.pkgHeader())
       .pipe($.umd({ namespace: () => 'EventMitt', exports: () => 'EventMitt' }))
+      .pipe($.feizheng.pkgHeader())
       .pipe(gulp.dest('dist'))
       .pipe($.size({ title: '[ default size ]:' }))
       .pipe($.uglify())
