@@ -1,14 +1,19 @@
 # event-mitt
 > A mini and light event emitter
 
+[![version][version-image]][version-url]
+[![license][license-image]][license-url]
+[![size][size-image]][size-url]
+[![download][download-image]][download-url]
+
 ## apis
-| name | args                            | description                          |
-|------|---------------------------------|--------------------------------------|
-| on   | name/*,handler                  | register an event                    |
-| off  | name,handler                    | unregister an event                  |
-| emit | name,data( recommend an object) | fire an event                        |
-| one  | name,data( recommend an object) | fire an event,only can register once |
-| once | name,data( recommend an object) | fire an event,only can execute once  |
+| name | params         | description                          |
+| ---- | -------------- | ------------------------------------ |
+| on   | name/*,handler | register an event                    |
+| off  | name,handler   | unregister an event                  |
+| emit | name,obj       | fire an event                        |
+| one  | name,obj       | fire an event,only can register once |
+| once | name,obj       | fire an event,only can execute once  |
 
 ## installation
 ```shell
@@ -58,3 +63,19 @@ res.destroy();
 + https://github.com/developit/mitt
 + https://github.com/jeromeetienne/microevent.js/blob/master/microevent.js
 + https://github.com/Wikiki/bulma-accordion/blob/master/src/js/events.js
+
+
+## license
+Code released under [the MIT license](https://github.com/afeiship/event-mitt/blob/master/LICENSE.txt).
+
+[version-image]: https://img.shields.io/npm/v/@feizheng/event-mitt
+[version-url]: https://npmjs.org/package/@feizheng/event-mitt
+
+[license-image]: https://img.shields.io/npm/l/@feizheng/event-mitt
+[license-url]: https://github.com/afeiship/event-mitt/blob/master/LICENSE.txt
+
+[size-image]: https://img.shields.io/bundlephobia/minzip/@feizheng/event-mitt
+[size-url]: https://github.com/afeiship/event-mitt/blob/master/dist/event-mitt.min.js
+
+[download-image]: https://img.shields.io/npm/dm/@feizheng/event-mitt
+[download-url]: https://www.npmjs.com/package/@feizheng/event-mitt
