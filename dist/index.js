@@ -2,8 +2,8 @@
  * name: @jswork/event-mitt
  * description: A mini and light event emitter
  * homepage: https://github.com/afeiship/event-mitt
- * version: 1.0.0
- * date: 2020-11-11T00:14:48.802Z
+ * version: 1.0.1
+ * date: 2020-11-11T00:17:31.823Z
  * license: MIT
  */
 

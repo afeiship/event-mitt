@@ -22,7 +22,7 @@ npm install -S @jswork/event-mitt
 
 ## usage
 ```js
-import EventMitt from '@feizheng/event-mitt';
+import EventMitt from '@jswork/event-mitt';
 const Person = class { };
 Object.assign(Person.prototype, EventMitt);
 const p1 = new Person();
@@ -68,14 +68,14 @@ res.destroy();
 ## license
 Code released under [the MIT license](https://github.com/afeiship/event-mitt/blob/master/LICENSE.txt).
 
-[version-image]: https://img.shields.io/npm/v/@feizheng/event-mitt
-[version-url]: https://npmjs.org/package/@feizheng/event-mitt
+[version-image]: https://img.shields.io/npm/v/@jswork/event-mitt
+[version-url]: https://npmjs.org/package/@jswork/event-mitt
 
-[license-image]: https://img.shields.io/npm/l/@feizheng/event-mitt
+[license-image]: https://img.shields.io/npm/l/@jswork/event-mitt
 [license-url]: https://github.com/afeiship/event-mitt/blob/master/LICENSE.txt
 
-[size-image]: https://img.shields.io/bundlephobia/minzip/@feizheng/event-mitt
+[size-image]: https://img.shields.io/bundlephobia/minzip/@jswork/event-mitt
 [size-url]: https://github.com/afeiship/event-mitt/blob/master/dist/event-mitt.min.js
 
-[download-image]: https://img.shields.io/npm/dm/@feizheng/event-mitt
-[download-url]: https://www.npmjs.com/package/@feizheng/event-mitt
+[download-image]: https://img.shields.io/npm/dm/@jswork/event-mitt
+[download-url]: https://www.npmjs.com/package/@jswork/event-mitt
