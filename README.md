@@ -17,7 +17,7 @@
 
 ## installation
 ```shell
-npm install -S @feizheng/event-mitt
+npm install -S @jswork/event-mitt
 ```
 
 ## usage
