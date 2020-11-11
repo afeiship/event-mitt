@@ -10,7 +10,8 @@
   "main": "dist/index.js",
   "scripts": {
     "test": "jest",
-    "build": "gulp"
+    "build": "gulp",
+    "release": "release-it"
   },
   "license": "MIT",
   "devDependencies": {
@@ -24,9 +25,20 @@
     "gulp-size": "^3.0.0",
     "gulp-uglify": "^3.0.2",
     "gulp-umd": "^2.0.0",
-    "jest": "^26.4.2"
+    "jest": "^26.4.2",
+    "release-it": "^14.2.1"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
-  }
+  },
+  "keywords": [
+    "event",
+    "emitter",
+    "mini",
+    "on",
+    "off",
+    "emit",
+    "tiny",
+    "event-bus"
+  ]
 }

@@ -1,0 +1,11 @@
+{
+  "hooks": {
+    "after:init": [
+      "npm test",
+      "t2k"
+    ]
+  },
+  "github": {
+    "release": true
+  }
+}
