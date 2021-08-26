@@ -46,11 +46,17 @@ var EventMitt = {
     inName !== '*' && dispatch(inName), dispatch('*');
   },
   one: function (inName, inHandler) {
+    var self = this;
     var map = (this._events = this._events || {});
     var evtMap = map[inName];
     if (!evtMap || !evtMap.length) {
       return this.on(inName, inHandler);
     }
+    return {
+      destroy: function () {
+        self.off(inName, inHandler);
+      }
+    };
   },
   once: function (inName, inHandler) {
     inHandler.__once__ = true;
