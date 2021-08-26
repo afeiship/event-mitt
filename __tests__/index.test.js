@@ -1,5 +1,5 @@
 var EventMitt = require('../dist/index');
-var nxKeyMap = require('@feizheng/next-key-map');
+var nxKeyMap = require('@jswork/next-key-map');
 
 test('basic on/off/fire for object', () => {
   var EventObj = Object.assign({}, EventMitt);
