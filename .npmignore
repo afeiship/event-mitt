@@ -15,4 +15,3 @@ __tests__
 Gemfile
 Rakefile
 .release-it.json
-dist

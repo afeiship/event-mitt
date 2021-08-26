@@ -15,8 +15,8 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@feizheng/gulp-pkg-header": "^1.0.4",
-    "@feizheng/next-key-map": "^1.0.0",
+    "@jswork/gulp-pkg-header": "^1.0.4",
+    "@jswork/next-key-map": "^1.0.2",
     "del": "^5.1.0",
     "gulp": "^4.0.2",
     "gulp-load-plugins": "^2.0.4",
@@ -28,6 +28,7 @@
     "release-it": "^14.2.1"
   },
   "publishConfig": {
+    "access": "public",
     "registry": "https://registry.npmjs.org/"
   },
   "keywords": [
