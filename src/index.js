@@ -61,5 +61,9 @@ var EventMitt = {
   once: function (inName, inHandler) {
     inHandler.__once__ = true;
     return this.on(inName, inHandler);
+  },
+  upon: function (inName, inHandler) {
+    this.off(inName);
+    return this.on(inName, inHandler);
   }
 };

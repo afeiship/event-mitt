@@ -7,13 +7,14 @@
 [![download][download-image]][download-url]
 
 ## apis
-| name | params         | description                          |
-| ---- | -------------- | ------------------------------------ |
-| on   | name/*,handler | register an event                    |
-| off  | name,handler   | unregister an event                  |
-| emit | name,obj       | fire an event                        |
-| one  | name,obj       | fire an event,only can register once |
-| once | name,obj       | fire an event,only can execute once  |
+| name | params         | description                                           |
+|------|----------------|-------------------------------------------------------|
+| on   | name/*,handler | register an event                                     |
+| off  | name,handler   | unregister an event                                   |
+| emit | name,obj       | fire an event                                         |
+| one  | name,obj       | fire an event,only can register once, same function   |
+| once | name,obj       | fire an event,only can execute once                   |
+| upon | name,obj       | fire an event, only register once, different function |
 
 ## installation
 ```shell
