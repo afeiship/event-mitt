@@ -2,11 +2,17 @@ var EventMitt = {
   on: function (inName, inHandler) {
     var self = this;
     var map = (this._events = this._events || {});
-    var listeners = (map[inName] = map[inName] || []);
+    var isImmidiate = inName.charAt(0) === '@';
+    var name = isImmidiate ? inName.slice(1) : inName;
+    var listeners = (map[name] = map[name] || []);
     listeners.push(inHandler);
+
+    // if is immidiate, trigger it
+    if (isImmidiate) inHandler.call(this);
+
     return {
       destroy: function () {
-        self.off(inName, inHandler);
+        self.off(name, inHandler);
       }
     };
   },
