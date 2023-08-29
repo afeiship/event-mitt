@@ -2,9 +2,8 @@ var EventMitt = {
   on: function (inName, inHandler) {
     var self = this;
     var map = (this._events = this._events || {});
-    var isImmidiate = inName.charAt(0) === '@';
-    var name = isImmidiate ? inName.slice(1) : inName;
-    var listeners = (map[name] = map[name] || []);
+    var isImmidiate = inHandler.__immediate__;
+    var listeners = (map[inName] = map[inName] || []);
     listeners.push(inHandler);
 
     // if is immidiate, trigger it
@@ -12,7 +11,7 @@ var EventMitt = {
 
     return {
       destroy: function () {
-        self.off(name, inHandler);
+        self.off(inName, inHandler);
       }
     };
   },
@@ -70,6 +69,10 @@ var EventMitt = {
   },
   upon: function (inName, inHandler) {
     this.off(inName);
+    return this.on(inName, inHandler);
+  },
+  on2immediate: function (inName, inHandler) {
+    inHandler.__immediate__ = true;
     return this.on(inName, inHandler);
   }
 };
