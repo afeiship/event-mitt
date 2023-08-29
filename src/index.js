@@ -1,13 +1,14 @@
 var EventMitt = {
-  on: function (inName, inHandler) {
+  on: function (inName, inHandler, inOptions) {
     var self = this;
     var map = (this._events = this._events || {});
-    var isImmidiate = inHandler.__immediate__;
+    var isImmidiate = inHandler.__immediate__ || inOptions?.immediate;
     var listeners = (map[inName] = map[inName] || []);
     listeners.push(inHandler);
 
     // if is immidiate, trigger it
     if (isImmidiate) inHandler.call(this);
+    if (inOptions?.once) inHandler.__once__ = true;
 
     return {
       destroy: function () {

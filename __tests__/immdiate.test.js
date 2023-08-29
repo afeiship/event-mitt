@@ -13,3 +13,21 @@ test('on2immediate', () => {
 
   expect(counter).toBe(2);
 });
+
+test('on with immdiate opts', () => {
+  var Person = class {};
+  Object.assign(Person.prototype, EventMitt);
+  var p1 = new Person();
+  var counter = 0;
+  p1.on(
+    'ev1',
+    () => {
+      counter++;
+    },
+    { immediate: true }
+  );
+
+  p1.emit('ev1');
+
+  expect(counter).toBe(2);
+});
