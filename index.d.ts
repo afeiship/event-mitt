@@ -6,7 +6,7 @@ interface EventMittOnOptions {
 interface EventMitt {
   on(name: string, handler: Function, options?: EventMittOnOptions): void;
   off(name: string, handler: Function): void;
-  emit(name: string, ...args: any[]): void;
+  emit(name: string, payload: any): void;
   one(name: string, handler: Function): void;
   once(name: string, handler: Function): void;
   upon(name: string, handler: Function): void;
