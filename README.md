@@ -12,10 +12,10 @@
 | on           | name/*,handler | register an event                                     |
 | off          | name,handler   | unregister an event                                   |
 | emit         | name,obj       | fire an event                                         |
-| one          | name,obj       | fire an event,only can register once, same function   |
-| once         | name,obj       | fire an event,only can execute once                   |
-| upon         | name,obj       | fire an event, only register once, different function |
-| on2immediate | name,obj       | Fire an event, immdiate execute function             |
+| one          | name,handler   | fire an event,only can register once, same function   |
+| once         | name,handler   | fire an event,only can execute once                   |
+| upon         | name,handler   | fire an event, only register once, different function |
+| on2immediate | name,handler   | Fire an event, immdiate execute function              |
 
 ## installation
 ```shell
