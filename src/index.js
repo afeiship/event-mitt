@@ -8,7 +8,7 @@ var EventMitt = {
 
     // if is immidiate, trigger it
     if (isImmidiate) inHandler.call(this);
-    if (inOptions?.once) inHandler.__once__ = true;
+    if (inOptions && inOptions.once) inHandler.__once__ = true;
 
     return {
       destroy: function () {
