@@ -1,14 +1,20 @@
+var defaults = {
+  immediate: false,
+  once: false
+};
+
 var EventMitt = {
   on: function (inName, inHandler, inOptions) {
     var self = this;
     var map = (this._events = this._events || {});
-    var isImmidiate = inHandler.__immediate__ || inOptions?.immediate;
+    var options = Object.assign({}, defaults, inOptions || {});
+    var isImmidiate = inHandler.__immediate__ || options.immediate;
     var listeners = (map[inName] = map[inName] || []);
     listeners.push(inHandler);
 
     // if is immidiate, trigger it
     if (isImmidiate) inHandler.call(this);
-    if (inOptions && inOptions.once) inHandler.__once__ = true;
+    if (options.once) inHandler.__once__ = true;
 
     return {
       destroy: function () {
