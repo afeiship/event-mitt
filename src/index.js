@@ -24,7 +24,7 @@ var EventMitt = {
   },
   off: function (inName, inHandler) {
     var map = (this._events = this._events || {});
-    if (inName in map === false) return;
+    if (!(inName in map)) return;
 
     var listeners = map[inName];
     var _listeners = listeners.slice(0);
