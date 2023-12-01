@@ -21,7 +21,7 @@ export namespace EventMittNamespace {
 
     on: (inName: string, inHandler: EventHandler, inOptions?: EventOptions) => EventListener;
     off: (inName: string, inHandler?: EventHandler) => void;
-    emit: (inName: string, inData: any) => void;
+    emit: (inName: string, inData?: any) => void;
     one: (inName: string, inHandler: EventHandler) => EventListener;
     once: (inName: string, inHandler: EventHandler) => EventListener;
     upon: (inName: string, inHandler: EventHandler) => EventListener;
