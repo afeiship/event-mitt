@@ -8,12 +8,12 @@ var EventMitt = {
     var self = this;
     var map = (this._events = this._events || {});
     var options = Object.assign({}, defaults, inOptions || {});
-    var isImmidiate = inHandler.__immediate__ || options.immediate;
+    var isImmediate = inHandler.__immediate__ || options.immediate;
     var listeners = (map[inName] = map[inName] || []);
     listeners.push(inHandler);
 
     // if is immidiate, trigger it
-    if (isImmidiate) inHandler.call(this);
+    if (isImmediate) inHandler.call(this);
     if (options.once) inHandler.__once__ = true;
 
     return {
