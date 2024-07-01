@@ -8,12 +8,14 @@ var cleanStarListeners = function (inName, inMap) {
   var isStart = starIndex === 0;
   var isEnd = starIndex === inName.length - 1;
   var isFull = inName === '*';
+  var endsName = inName.slice(0, -1);
+  var startsName = inName.slice(1);
   if (starIndex === -1) return;
   for (var key in inMap) {
     var cleanCondition =
       isFull ||
-      (isStart && key.endsWith(inName.slice(1))) ||
-      (isEnd && key.startsWith(inName.slice(0, -1)));
+      (isStart && key.endsWith(startsName)) ||
+      (isEnd && key.startsWith(endsName));
     if (cleanCondition) {
       inMap[key].length = 0;
     }
