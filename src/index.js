@@ -3,6 +3,23 @@ var defaults = {
   once: false
 };
 
+var cleanStarListeners = function (inName, inMap) {
+  var starIndex = inName.indexOf('*');
+  var isStart = starIndex === 0;
+  var isEnd = starIndex === inName.length - 1;
+  var isFull = inName === '*';
+  if (starIndex === -1) return;
+  for (var key in inMap) {
+    var cleanCondition =
+      isFull ||
+      (isStart && key.endsWith(inName.slice(1))) ||
+      (isEnd && key.startsWith(inName.slice(0, -1)));
+    if (cleanCondition) {
+      inMap[key].length = 0;
+    }
+  }
+};
+
 var EventMitt = {
   on: function (inName, inHandler, inOptions) {
     var self = this;
@@ -24,8 +41,10 @@ var EventMitt = {
   },
   off: function (inName, inHandler) {
     var map = (this._events = this._events || {});
-    if (!(inName in map)) return;
+    // process star events
+    cleanStarListeners(inName, map);
 
+    if (!(inName in map)) return;
     var listeners = map[inName];
     var _listeners = listeners.slice(0);
     if (inHandler) {
