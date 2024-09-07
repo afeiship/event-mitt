@@ -19,7 +19,7 @@ const defaults = {
 
 const getListeners = function (inName: string, inMap: any) {
   let result: any[] = inMap[inName] || [];
-  if (inName.indexOf('*') !== -1) return result;
+  if (inName.indexOf('*') === -1) return result;
   for (let key in inMap) {
     if (key === inName) continue;
     const listeners = inMap[key] || [];
@@ -54,6 +54,7 @@ const EventMitt = {
     const map = (this._events = this._events || {});
     const listeners = getListeners(inName, map);
     const _listeners = listeners.slice(0);
+
     if (inHandler) {
       for (let i = 0; i < _listeners.length; i++) {
         if (_listeners[i] === inHandler) {
@@ -61,7 +62,13 @@ const EventMitt = {
         }
       }
     } else {
-      listeners.length = 0;
+      for (let i = 0; i < _listeners.length; i++) {
+        for (let item in map) {
+          if (wildcardMatch(item, inName)) {
+            this.off(item, _listeners[i]);
+          }
+        }
+      }
     }
   },
   emit: function (inName: string, inData: any) {
@@ -69,7 +76,7 @@ const EventMitt = {
     const self = this;
     const dispatch = function (inType: string) {
       const listeners = getListeners(inType, map);
-      const args = inType === '*' ? [inName, inData] : [inData];
+      const args = inType.includes('*') ? [inName, inData] : [inData];
       for (let i = 0; i < listeners.length; i++) {
         const handler = listeners[i];
         if (handler.apply(null, args) === false) {
@@ -81,7 +88,8 @@ const EventMitt = {
         }
       }
     };
-    inName !== '*' && dispatch(inName), dispatch('*');
+
+    dispatch(inName);
   },
   one: function (inName: string, inHandler: EventMittHandler) {
     const self = this;
