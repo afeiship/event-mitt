@@ -17,27 +17,11 @@ const defaults = {
   once: false,
 };
 
-const cleanStarListeners = function (inName, inMap) {
-  const starIndex = inName.indexOf('*');
-  const isStart = starIndex === 0;
-  const isEnd = starIndex === inName.length - 1;
-  const isFull = inName === '*';
-  const endsName = inName.slice(0, -1);
-  const startsName = inName.slice(1);
-  if (starIndex === -1) return;
-  for (let key in inMap) {
-    const cleanCondition =
-      isFull || (isStart && key.endsWith(startsName)) || (isEnd && key.startsWith(endsName));
-    if (cleanCondition) {
-      inMap[key].length = 0;
-    }
-  }
-};
-
 const getListeners = function (inName: string, inMap: any) {
-  let result: any[] = [];
-  if (inName.indexOf('*') !== -1) return inMap[inName] || [];
+  let result: any[] = inMap[inName] || [];
+  if (inName.indexOf('*') !== -1) return result;
   for (let key in inMap) {
+    if (key === inName) continue;
     const listeners = inMap[key] || [];
     if (wildcardMatch(key, inName)) {
       result = result.concat(listeners);
@@ -68,10 +52,7 @@ const EventMitt = {
   },
   off: function (inName: string, inHandler?: EventMittHandler) {
     const map = (this._events = this._events || {});
-    // process star events
-    cleanStarListeners(inName, map);
-
-    const listeners = map[inName];
+    const listeners = getListeners(inName, map);
     const _listeners = listeners.slice(0);
     if (inHandler) {
       for (let i = 0; i < _listeners.length; i++) {
