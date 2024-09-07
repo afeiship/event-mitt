@@ -1,46 +1,38 @@
 {
   "name": "@jswork/event-mitt",
-  "version": "1.0.14",
-  "description": "A mini and light event emitter",
-  "homepage": "https://github.com/afeiship/event-mitt",
-  "author": {
-    "name": "afei",
-    "email": "1290657123@qq.com"
-  },
-  "main": "dist/index.js",
+  "version": "2.0.0",
+  "description": "A mini and light event emitter.",
+  "main": "./dist/index.cjs.js",
+  "module": "./dist/index.esm.js",
+  "browser": "./dist/index.umd.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "global.d.ts"
+  ],
   "scripts": {
+    "build": "tsup",
+    "postbuild": "rollup -c rollup.config.mjs",
     "test": "bun test",
-    "build": "gulp",
     "release": "release-it"
   },
   "license": "MIT",
   "devDependencies": {
-    "@jswork/gulp-pkg-header": "^1.0.4",
     "@jswork/next": "^1.2.2",
-    "@jswork/next-key-map": "^1.0.2",
-    "del": "^5.1.0",
-    "gulp": "^4.0.2",
-    "gulp-load-plugins": "^2.0.4",
-    "gulp-rename": "^2.0.0",
-    "gulp-size": "^3.0.0",
-    "gulp-uglify": "^3.0.2",
-    "gulp-umd": "^2.0.0"
+    "@swc/core": "^1.3.101",
+    "@types/jest": "^29.5.12",
+    "@types/node": "^18.15.5",
+    "@jswork/rollup-banner": "^1.0.1",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-typescript": "^11.1.6",
+    "rollup": "^4.9.6",
+    "tslib": "^2.6.2",
+    "tsup": "^8.0.1",
+    "typescript": "^4.9.5"
   },
   "publishConfig": {
     "access": "public",
-    "registry": "https://registry.npmjs.org/"
+    "registry": "https://registry.npmjs.org"
   },
-  "keywords": [
-    "event",
-    "emitter",
-    "mini",
-    "on",
-    "off",
-    "emit",
-    "tiny",
-    "event-bus",
-    "one",
-    "once",
-    "immediate"
-  ]
+  "dependencies": {}
 }
