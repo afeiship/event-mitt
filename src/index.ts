@@ -1,3 +1,5 @@
+import wildcardMatch from '@jswork/wildcard-match';
+
 export interface EventMittOptions {
   immediate?: boolean;
   once?: boolean;
@@ -32,6 +34,18 @@ const cleanStarListeners = function (inName, inMap) {
   }
 };
 
+const getListeners = function (inName: string, inMap: any) {
+  let result: any[] = [];
+  if (inName.indexOf('*') !== -1) return inMap[inName] || [];
+  for (let key in inMap) {
+    const listeners = inMap[key] || [];
+    if (wildcardMatch(key, inName)) {
+      result = result.concat(listeners);
+    }
+  }
+  return result;
+};
+
 const EventMitt = {
   _events: {},
   on: function (inName: string, inHandler: EventMittHandler, inOptions?: EventMittOptions) {
@@ -57,7 +71,6 @@ const EventMitt = {
     // process star events
     cleanStarListeners(inName, map);
 
-    if (!(inName in map)) return;
     const listeners = map[inName];
     const _listeners = listeners.slice(0);
     if (inHandler) {
@@ -74,7 +87,7 @@ const EventMitt = {
     const map = (this._events = this._events || {});
     const self = this;
     const dispatch = function (inType: string) {
-      const listeners = (map[inType] || []).slice();
+      const listeners = getListeners(inType, map);
       const args = inType === '*' ? [inName, inData] : [inData];
       for (let i = 0; i < listeners.length; i++) {
         const handler = listeners[i];
