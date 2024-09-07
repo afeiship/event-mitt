@@ -24,7 +24,7 @@ const getListeners = function (inName: string, inMap: any) {
     if (key === inName) continue;
     const listeners = inMap[key] || [];
     if (wildcardMatch(key, inName)) {
-      result = result.concat(listeners);
+      result = listeners.concat(result);
     }
   }
   return result;
