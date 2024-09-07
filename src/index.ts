@@ -72,7 +72,7 @@ const EventMitt = {
       }
     }
   },
-  emit: function (inName: string, inData: any) {
+  emit: function (inName: string, inData?: any) {
     const map = (this._events = this._events || {});
     const self = this;
     const dispatch = function (inType: string) {
