@@ -18,16 +18,17 @@ const defaults = {
 };
 
 const getListeners = function (inName: string, inMap: any) {
-  let result: any[] = inMap[inName] || [];
-  if (inName.indexOf('*') === -1) return result;
+  let target: any[] = inMap[inName] || [];
+  let result: any[] = [];
+  if (inName.indexOf('*') === -1) return target;
   for (let key in inMap) {
     if (key === inName) continue;
     const listeners = inMap[key] || [];
     if (wildcardMatch(key, inName)) {
-      result = listeners.concat(result);
+      result = result.concat(listeners);
     }
   }
-  return result;
+  return result.concat(target);
 };
 
 const EventMitt = {
