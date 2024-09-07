@@ -31,7 +31,7 @@ var EventMitt = {
     var listeners = (map[inName] = map[inName] || []);
     listeners.push(inHandler);
 
-    // if is immidiate, trigger it
+    // if is immediate, trigger it
     if (isImmediate) inHandler.call(this);
     if (options.once) inHandler.__once__ = true;
 
