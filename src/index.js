@@ -3,16 +3,16 @@ var defaults = {
   once: false
 };
 
-var cleanStarListeners = function (inName, inMap) {
-  var starIndex = inName.indexOf('*');
-  var isStart = starIndex === 0;
-  var isEnd = starIndex === inName.length - 1;
-  var isFull = inName === '*';
-  var endsName = inName.slice(0, -1);
-  var startsName = inName.slice(1);
+const cleanStarListeners = function(inName, inMap) {
+  const starIndex = inName.indexOf('*');
+  const isStart = starIndex === 0;
+  const isEnd = starIndex === inName.length - 1;
+  const isFull = inName === '*';
+  const endsName = inName.slice(0, -1);
+  const startsName = inName.slice(1);
   if (starIndex === -1) return;
-  for (var key in inMap) {
-    var cleanCondition =
+  for (let key in inMap) {
+    const cleanCondition =
       isFull ||
       (isStart && key.endsWith(startsName)) ||
       (isEnd && key.startsWith(endsName));
@@ -22,13 +22,13 @@ var cleanStarListeners = function (inName, inMap) {
   }
 };
 
-var EventMitt = {
-  on: function (inName, inHandler, inOptions) {
-    var self = this;
-    var map = (this._events = this._events || {});
-    var options = Object.assign({}, defaults, inOptions || {});
-    var isImmediate = inHandler.__immediate__ || options.immediate;
-    var listeners = (map[inName] = map[inName] || []);
+const EventMitt = {
+  on: function(inName, inHandler, inOptions) {
+    const self = this;
+    const map = (this._events = this._events || {});
+    const options = Object.assign({}, defaults, inOptions || {});
+    const isImmediate = inHandler.__immediate__ || options.immediate;
+    const listeners = (map[inName] = map[inName] || []);
     listeners.push(inHandler);
 
     // if is immediate, trigger it
@@ -36,19 +36,19 @@ var EventMitt = {
     if (options.once) inHandler.__once__ = true;
 
     return {
-      destroy: function () {
+      destroy: function() {
         self.off(inName, inHandler);
       }
     };
   },
-  off: function (inName, inHandler) {
-    var map = (this._events = this._events || {});
+  off: function(inName, inHandler) {
+    const map = (this._events = this._events || {});
     // process star events
     cleanStarListeners(inName, map);
 
     if (!(inName in map)) return;
-    var listeners = map[inName];
-    var _listeners = listeners.slice(0);
+    const listeners = map[inName];
+    const _listeners = listeners.slice(0);
     if (inHandler) {
       for (var i = 0; i < _listeners.length; i++) {
         if (_listeners[i] === inHandler) {
@@ -59,14 +59,14 @@ var EventMitt = {
       listeners.length = 0;
     }
   },
-  emit: function (inName, inData) {
-    var map = (this._events = this._events || {});
-    var self = this;
-    var dispatch = function (inType) {
-      var listeners = (map[inType] || []).slice();
-      var args = inType === '*' ? [inName, inData] : [inData];
-      for (var i = 0; i < listeners.length; i++) {
-        var handler = listeners[i];
+  emit: function(inName, inData) {
+    const map = (this._events = this._events || {});
+    const self = this;
+    const dispatch = function(inType) {
+      const listeners = (map[inType] || []).slice();
+      const args = inType === '*' ? [inName, inData] : [inData];
+      for (let i = 0; i < listeners.length; i++) {
+        const handler = listeners[i];
         if (handler.apply(null, args) === false) {
           break;
         }
@@ -78,28 +78,28 @@ var EventMitt = {
     };
     inName !== '*' && dispatch(inName), dispatch('*');
   },
-  one: function (inName, inHandler) {
-    var self = this;
-    var map = (this._events = this._events || {});
-    var evtMap = map[inName];
+  one: function(inName, inHandler) {
+    const self = this;
+    const map = (this._events = this._events || {});
+    const evtMap = map[inName];
     if (!evtMap || !evtMap.length) {
       return this.on(inName, inHandler);
     }
     return {
-      destroy: function () {
+      destroy: function() {
         self.off(inName, inHandler);
       }
     };
   },
-  once: function (inName, inHandler) {
+  once: function(inName, inHandler) {
     inHandler.__once__ = true;
     return this.on(inName, inHandler);
   },
-  upon: function (inName, inHandler) {
+  upon: function(inName, inHandler) {
     this.off(inName);
     return this.on(inName, inHandler);
   },
-  on2immediate: function (inName, inHandler) {
+  on2immediate: function(inName, inHandler) {
     inHandler.__immediate__ = true;
     return this.on(inName, inHandler);
   }
