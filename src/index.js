@@ -1,4 +1,4 @@
-var defaults = {
+const defaults = {
   immediate: false,
   once: false
 };
