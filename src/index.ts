@@ -1,8 +1,34 @@
 import wildcardMatch from '@jswork/wildcard-match';
 
-export interface EventMittOptions {
-  immediate?: boolean;
-  once?: boolean;
+export namespace EventMittNamespace {
+  export interface EventOptions {
+    immediate?: boolean;
+    once?: boolean;
+  }
+
+  export interface EventHandler {
+    (this: EventMitt, ...args: any[]): void;
+  }
+
+  export interface EventListener {
+    destroy: () => void;
+  }
+
+  export interface EventMap {
+    [eventName: string]: EventHandler[] | undefined;
+  }
+
+  export interface EventMitt {
+    _events?: EventMap;
+
+    on: (inName: string, inHandler: EventHandler, inOptions?: EventOptions) => EventListener;
+    off: (inName: string, inHandler?: EventHandler) => void;
+    emit: (inName: string, inData?: any) => void;
+    one: (inName: string, inHandler: EventHandler) => EventListener;
+    once: (inName: string, inHandler: EventHandler) => EventListener;
+    upon: (inName: string, inHandler: EventHandler) => EventListener;
+    on2immediate: (inName: string, inHandler: EventHandler) => EventListener;
+  }
 }
 
 export interface EventMittHandler {
@@ -12,7 +38,7 @@ export interface EventMittHandler {
   (...args: any[]): void;
 }
 
-const defaults = {
+const defaults: EventMittNamespace.EventOptions = {
   immediate: false,
   once: false,
 };
@@ -33,7 +59,11 @@ const getListeners = function (inName: string, inMap: any) {
 
 const EventMitt = {
   _events: {},
-  on: function (inName: string, inHandler: EventMittHandler, inOptions?: EventMittOptions) {
+  on: function (
+    inName: string,
+    inHandler: EventMittHandler,
+    inOptions?: EventMittNamespace.EventOptions
+  ) {
     const self = this;
     const map = (this._events = this._events || {});
     const options = Object.assign({}, defaults, inOptions || {});
