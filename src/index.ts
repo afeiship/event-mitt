@@ -1,5 +1,3 @@
-import wildcardMatch from '@jswork/wildcard-match';
-
 export namespace EventMittNamespace {
   export interface EventOptions {
     immediate?: boolean;
@@ -43,27 +41,26 @@ const defaults: EventMittNamespace.EventOptions = {
   once: false,
 };
 
-const getListeners = function (inName: string, inMap: any) {
-  let target: any[] = inMap[inName] || [];
-  let result: any[] = [];
-  if (inName.indexOf('*') === -1) return target;
+const cleanStarListeners = function (inName, inMap) {
+  const starIndex = inName.indexOf('*');
+  const isStart = starIndex === 0;
+  const isEnd = starIndex === inName.length - 1;
+  const isFull = inName === '*';
+  const endsName = inName.slice(0, -1);
+  const startsName = inName.slice(1);
+  if (starIndex === -1) return;
   for (let key in inMap) {
-    if (key === inName) continue;
-    const listeners = inMap[key] || [];
-    if (wildcardMatch(key, inName)) {
-      result = result.concat(listeners);
+    const cleanCondition =
+      isFull || (isStart && key.endsWith(startsName)) || (isEnd && key.startsWith(endsName));
+    if (cleanCondition) {
+      inMap[key].length = 0;
     }
   }
-  return result.concat(target);
 };
 
 const EventMitt = {
   _events: {},
-  on: function (
-    inName: string,
-    inHandler: EventMittHandler,
-    inOptions?: EventMittNamespace.EventOptions
-  ) {
+  on: function (inName: string, inHandler: EventMittHandler, inOptions?: EventMittNamespace.EventOptions) {
     const self = this;
     const map = (this._events = this._events || {});
     const options = Object.assign({}, defaults, inOptions || {});
@@ -83,31 +80,28 @@ const EventMitt = {
   },
   off: function (inName: string, inHandler?: EventMittHandler) {
     const map = (this._events = this._events || {});
-    const listeners = getListeners(inName, map);
-    const _listeners = listeners.slice(0);
+    // process star events
+    cleanStarListeners(inName, map);
 
+    if (!(inName in map)) return;
+    const listeners = map[inName];
+    const _listeners = listeners.slice(0);
     if (inHandler) {
-      for (let i = 0; i < _listeners.length; i++) {
+      for (var i = 0; i < _listeners.length; i++) {
         if (_listeners[i] === inHandler) {
           listeners.splice(i, 1);
         }
       }
     } else {
-      for (let i = 0; i < _listeners.length; i++) {
-        for (let item in map) {
-          if (wildcardMatch(item, inName)) {
-            this.off(item, _listeners[i]);
-          }
-        }
-      }
+      listeners.length = 0;
     }
   },
-  emit: function (inName: string, inData?: any) {
+  emit: function (inName: string, inData: any) {
     const map = (this._events = this._events || {});
     const self = this;
     const dispatch = function (inType: string) {
-      const listeners = getListeners(inType, map);
-      const args = inType.includes('*') ? [inName, inData] : [inData];
+      const listeners = (map[inType] || []).slice();
+      const args = inType === '*' ? [inName, inData] : [inData];
       for (let i = 0; i < listeners.length; i++) {
         const handler = listeners[i];
         if (handler.apply(null, args) === false) {
@@ -119,9 +113,7 @@ const EventMitt = {
         }
       }
     };
-
-    if (inName !== '*') dispatch(inName);
-    dispatch('*');
+    inName !== '*' && dispatch(inName), dispatch('*');
   },
   one: function (inName: string, inHandler: EventMittHandler) {
     const self = this;

@@ -1,5 +1,4 @@
-import EventMitt from '../src';
-import { EventMittNamespace } from '../global';
+import EventMitt, { EventMittNamespace } from '../src';
 
 describe('api.basic', () => {
   test('01/basic on/off/fire for object', () => {
@@ -19,8 +18,7 @@ describe('api.basic', () => {
   });
 
   test('02/basic on/off/fire for es5 class', () => {
-    const Person = function() {
-    };
+    const Person = function () {};
     Object.assign(Person.prototype, EventMitt);
     const p1 = new Person();
     let sum = 0;
@@ -38,8 +36,7 @@ describe('api.basic', () => {
   });
 
   test('basic on/off/fire for es6 class', () => {
-    class Person {
-    }
+    class Person {}
 
     Object.assign(Person.prototype, EventMitt);
     const p1 = new Person() as EventMittNamespace.EventMitt;

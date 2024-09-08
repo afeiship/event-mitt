@@ -1,12 +1,10 @@
-import EventMitt from '../src';
-import { EventMittNamespace } from '../global';
-
+import EventMitt, { EventMittNamespace } from '../src';
 
 describe('off clean star', () => {
   test('clean normal listners', () => {
     var Person = class {};
     Object.assign(Person.prototype, EventMitt);
-    var p1 = new Person() as EventMittNamespace.EventMitt
+    var p1 = new Person() as EventMittNamespace.EventMitt;
     var sum = 0;
     var total = 0;
     var res1 = p1.on('ev1', () => {

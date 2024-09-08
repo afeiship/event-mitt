@@ -1,5 +1,4 @@
-import EventMitt from '../src';
-import { EventMittNamespace } from '../global';
+import EventMitt, { EventMittNamespace } from '../src';
 
 describe('api.immediate', () => {
   test('on2immediate', () => {

@@ -1,5 +1,4 @@
-import EventMitt from '../src';
-import { EventMittNamespace } from '../global';
+import EventMitt, { EventMittNamespace } from '../src';
 
 describe('api.break', () => {
   test('01/basic on/off/fire for object', () => {
