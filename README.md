@@ -61,12 +61,6 @@ p1.emit('ev3');
 res.destroy();
 ```
 
-## resources
-+ https://github.com/developit/mitt
-+ https://github.com/jeromeetienne/microevent.js/blob/master/microevent.js
-+ https://github.com/Wikiki/bulma-accordion/blob/master/src/js/events.js
-
-
 ## license
 Code released under [the MIT license](https://github.com/afeiship/event-mitt/blob/master/LICENSE.txt).
 
