@@ -60,7 +60,11 @@ const cleanStarListeners = function (inName, inMap) {
 
 const EventMitt = {
   _events: {},
-  on: function (inName: string, inHandler: EventMittHandler, inOptions?: EventMittNamespace.EventOptions) {
+  on: function (
+    inName: string,
+    inHandler: EventMittHandler,
+    inOptions?: EventMittNamespace.EventOptions
+  ) {
     const self = this;
     const map = (this._events = this._events || {});
     const options = Object.assign({}, defaults, inOptions || {});
@@ -101,7 +105,7 @@ const EventMitt = {
     const self = this;
     const dispatch = function (inType: string) {
       const listeners = (map[inType] || []).slice();
-      const args = inType === '*' ? [inName, inData] : [inData];
+      const args = inType.includes('*') ? [inName, inData] : [inData];
       for (let i = 0; i < listeners.length; i++) {
         const handler = listeners[i];
         if (handler.apply(null, args) === false) {
