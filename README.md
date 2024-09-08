@@ -61,32 +61,33 @@ p1.emit('ev3');
 res.destroy();
 
 // ---- mitt fn ----
-import { mitt } from '@jswork/event-mitt';
+import { mitt } from "@jswork/event-mitt";
 const emitter = mitt();
 
-emitter.on('ev1', () => {
-  console.log('ev1', sum);
+let sum = 0;
+
+emitter.on("ev1", () => {
+  console.log("ev1", sum);
   sum = sum + 1;
 });
 
-emitter.on('ev2', () => {
-  console.log('ev2', sum);
+emitter.on("ev2", () => {
+  console.log("ev2", sum);
   sum = sum + 3;
 });
 
-emitter.on('ev3', () => {
-  console.log('ev3', sum);
+emitter.on("ev3", () => {
+  console.log("ev3", sum);
   sum = sum + 5;
 });
 
-emitter.on('*', (name) => {
-  console.log('just a log', name);
-  total++;
+emitter.on("*", (name) => {
+  console.log("just a log", name);
 });
 
-emitter.emit('ev1');
-emitter.emit('ev2');
-emitter.emit('ev3');
+emitter.emit("ev1");
+emitter.emit("ev2");
+emitter.emit("ev3");
 ```
 
 ## license
