@@ -32,9 +32,6 @@ export namespace EventMittNamespace {
 }
 
 export interface EventMittHandler {
-  __immediate__?: boolean;
-  __once__?: boolean;
-
   (...args: any[]): void;
 }
 
