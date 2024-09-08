@@ -118,7 +118,8 @@ const EventMitt = {
     const matchedHandlers = getMatchedListeners(inName, map);
     for (let i = 0; i < matchedHandlers.length; i++) {
       const eventObj = matchedHandlers[i] as any;
-      if (eventObj.handler(inData) === false) {
+      const args = inName.includes('*') ? [inName, inData] : [inData];
+      if (eventObj.handler(...args) === false) {
         break;
       }
       if (eventObj.options.once) {
