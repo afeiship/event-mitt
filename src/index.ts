@@ -152,6 +152,6 @@ const EventMitt = {
   },
 };
 
-export const mitt = () => Object.assign({}, EventMitt);
+export const mitt = (): EventMittNamespace.EventMitt => Object.assign({}, EventMitt);
 
 export default EventMitt;
