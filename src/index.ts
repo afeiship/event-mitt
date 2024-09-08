@@ -1,3 +1,5 @@
+import wildcardMatch from '@jswork/wildcard-match';
+
 export namespace EventMittNamespace {
   export interface EventOptions {
     immediate?: boolean;
@@ -41,21 +43,36 @@ const defaults: EventMittNamespace.EventOptions = {
   once: false,
 };
 
-const cleanStarListeners = function (inName: string, inMap: any) {
-  const starIndex = inName.indexOf('*');
-  const isStart = starIndex === 0;
-  const isEnd = starIndex === inName.length - 1;
-  const isFull = inName === '*';
-  const endsName = inName.slice(0, -1);
-  const startsName = inName.slice(1);
-  if (starIndex === -1) return;
-  for (let key in inMap) {
-    const cleanCondition =
-      isFull || (isStart && key.endsWith(startsName)) || (isEnd && key.startsWith(endsName));
-    if (cleanCondition) {
-      inMap[key].length = 0;
+const getMatchedNames = function (inName: string, inMap: any) {
+  const matchedTypes: string[] = [];
+
+  if (inMap[inName]) matchedTypes.push(inName);
+
+  Object.keys(inMap).forEach((eventType: string) => {
+    if (wildcardMatch(eventType, inName)) {
+      matchedTypes.push(eventType);
     }
+  });
+
+  return matchedTypes.filter((value, index, self) => self.indexOf(value) === index);
+};
+
+const getMatchedListeners = function (inName: string, inMap: any) {
+  const allHandlers: EventMittNamespace.EventHandler[] = [];
+  const commonStarHandler = inMap['*'];
+
+  if (inMap[inName]) {
+    allHandlers.push(...inMap[inName]);
+  } else {
+    Object.keys(inMap).forEach((eventType) => {
+      if (wildcardMatch(eventType, inName)) {
+        allHandlers.push(...inMap[eventType]);
+      }
+    });
   }
+
+  if (commonStarHandler) allHandlers.push(...commonStarHandler);
+  return allHandlers;
 };
 
 const EventMitt = {
@@ -68,13 +85,11 @@ const EventMitt = {
     const self = this;
     const map = (this._events = this._events || {});
     const options = Object.assign({}, defaults, inOptions || {});
-    const isImmediate = inHandler.__immediate__ || options.immediate;
     const listeners = (map[inName] = map[inName] || []);
-    listeners.push(inHandler);
+    listeners.push({ handler: inHandler, options });
 
     // if is immediate, trigger it
-    if (isImmediate) inHandler.call(this);
-    if (options.once) inHandler.__once__ = true;
+    if (options.immediate) inHandler.call(this);
 
     return {
       destroy: function () {
@@ -84,40 +99,32 @@ const EventMitt = {
   },
   off: function (inName: string, inHandler?: EventMittHandler) {
     const map = (this._events = this._events || {});
-    // process star events
-    cleanStarListeners(inName, map);
-
-    if (!(inName in map)) return;
-    const listeners = map[inName];
-    const _listeners = listeners.slice(0);
-    if (inHandler) {
-      for (let i = 0; i < _listeners.length; i++) {
-        if (_listeners[i] === inHandler) {
-          listeners.splice(i, 1);
+    const matchedTypes = getMatchedNames(inName, map);
+    matchedTypes.forEach((eventType) => {
+      if (this._events[eventType]) {
+        // 检查是否存在
+        this._events[eventType] = this._events[eventType].filter((eventObj) => {
+          if (!inHandler) return false;
+          return eventObj.handler !== inHandler;
+        });
+        if (this._events[eventType].length === 0) {
+          delete this._events[eventType];
         }
       }
-    } else {
-      listeners.length = 0;
-    }
+    });
   },
-  emit: function (inName: string, inData: any) {
+  emit: function (inName: string, inData?: any) {
     const map = (this._events = this._events || {});
-    const self = this;
-    const dispatch = function (inType: string) {
-      const listeners = (map[inType] || []).slice();
-      const args = inType === '*' ? [inName, inData] : [inData];
-      for (let i = 0; i < listeners.length; i++) {
-        const handler = listeners[i];
-        if (handler.apply(null, args) === false) {
-          break;
-        }
-
-        if (handler.__once__) {
-          self.off(inName, handler);
-        }
+    const matchedHandlers = getMatchedListeners(inName, map);
+    for (let i = 0; i < matchedHandlers.length; i++) {
+      const eventObj = matchedHandlers[i] as any;
+      if (eventObj.handler(inData) === false) {
+        break;
       }
-    };
-    inName !== '*' && dispatch(inName), dispatch('*');
+      if (eventObj.options.once) {
+        this.off(inName, eventObj.handler);
+      }
+    }
   },
   one: function (inName: string, inHandler: EventMittHandler) {
     const self = this;
@@ -133,16 +140,14 @@ const EventMitt = {
     };
   },
   once: function (inName: string, inHandler: EventMittHandler) {
-    inHandler.__once__ = true;
-    return this.on(inName, inHandler);
+    return this.on(inName, inHandler, { once: true });
   },
   upon: function (inName: string, inHandler: EventMittHandler) {
     this.off(inName);
     return this.on(inName, inHandler);
   },
   on2immediate: function (inName: string, inHandler: EventMittHandler) {
-    inHandler.__immediate__ = true;
-    return this.on(inName, inHandler);
+    return this.on(inName, inHandler, { immediate: true });
   },
 };
 
