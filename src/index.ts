@@ -86,7 +86,7 @@ const EventMitt = {
     const map = (this._events = this._events || {});
     const options = Object.assign({}, defaults, inOptions || {});
     const listeners = (map[inName] = map[inName] || []);
-    listeners.push({ handler: inHandler, options });
+    listeners.push({ type: inName, handler: inHandler, options });
 
     // if is immediate, trigger it
     if (options.immediate) inHandler.call(this);
@@ -118,8 +118,8 @@ const EventMitt = {
     const matchedHandlers = getMatchedListeners(inName, map);
     for (let i = 0; i < matchedHandlers.length; i++) {
       const eventObj = matchedHandlers[i] as any;
-      const args = inName.includes('*') ? [inName, inData] : [inData];
-      if (eventObj.handler(...args) === false) {
+      const args = eventObj.type.includes('*') ? [inName, inData] : [inData];
+      if (eventObj.handler.apply(this, args) === false) {
         break;
       }
       if (eventObj.options.once) {
