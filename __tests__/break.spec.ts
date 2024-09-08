@@ -9,16 +9,16 @@ describe('api.break', () => {
     let total = 0;
     p1.on('ev1', () => {
       total++;
-      console.log('ev1 1 fired');
+      // console.log('ev1 1 fired');
     });
     p1.on('ev1', () => {
       total++;
-      console.log('ev1 2 fired');
+      // console.log('ev1 2 fired');
       return false;
     });
     p1.on('ev1', () => {
       total++;
-      console.log('ev1 3 will not fired');
+      // console.log('ev1 3 will not fired');
     });
 
     p1.emit('ev1');
