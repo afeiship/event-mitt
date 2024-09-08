@@ -120,7 +120,8 @@ const EventMitt = {
       }
     };
 
-    dispatch(inName);
+    if (inName !== '*') dispatch(inName);
+    dispatch('*');
   },
   one: function (inName: string, inHandler: EventMittHandler) {
     const self = this;
