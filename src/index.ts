@@ -41,7 +41,7 @@ const defaults: EventMittNamespace.EventOptions = {
   once: false,
 };
 
-const cleanStarListeners = function (inName, inMap) {
+const cleanStarListeners = function (inName: string, inMap: any) {
   const starIndex = inName.indexOf('*');
   const isStart = starIndex === 0;
   const isEnd = starIndex === inName.length - 1;
@@ -60,7 +60,11 @@ const cleanStarListeners = function (inName, inMap) {
 
 const EventMitt = {
   _events: {},
-  on: function (inName: string, inHandler: EventMittHandler, inOptions?: EventMittNamespace.EventOptions) {
+  on: function (
+    inName: string,
+    inHandler: EventMittHandler,
+    inOptions?: EventMittNamespace.EventOptions
+  ) {
     const self = this;
     const map = (this._events = this._events || {});
     const options = Object.assign({}, defaults, inOptions || {});
@@ -87,7 +91,7 @@ const EventMitt = {
     const listeners = map[inName];
     const _listeners = listeners.slice(0);
     if (inHandler) {
-      for (var i = 0; i < _listeners.length; i++) {
+      for (let i = 0; i < _listeners.length; i++) {
         if (_listeners[i] === inHandler) {
           listeners.splice(i, 1);
         }
