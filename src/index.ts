@@ -152,4 +152,6 @@ const EventMitt = {
   },
 };
 
+export const mitt = () => Object.assign({}, EventMitt);
+
 export default EventMitt;

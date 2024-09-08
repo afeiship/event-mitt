@@ -59,6 +59,34 @@ p1.emit('ev3');
 
 // destory:
 res.destroy();
+
+// ---- mitt fn ----
+import { mitt } from '@jswork/event-mitt';
+const emitter = mitt();
+
+emitter.on('ev1', () => {
+  console.log('ev1', sum);
+  sum = sum + 1;
+});
+
+emitter.on('ev2', () => {
+  console.log('ev2', sum);
+  sum = sum + 3;
+});
+
+emitter.on('ev3', () => {
+  console.log('ev3', sum);
+  sum = sum + 5;
+});
+
+emitter.on('*', (name) => {
+  console.log('just a log', name);
+  total++;
+});
+
+emitter.emit('ev1');
+emitter.emit('ev2');
+emitter.emit('ev3');
 ```
 
 ## license
