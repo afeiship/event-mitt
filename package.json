@@ -1,6 +1,6 @@
 {
   "name": "@jswork/event-mitt",
-  "version": "2.0.8",
+  "version": "2.0.9",
   "description": "A mini and light event emitter.",
   "main": "./dist/index.cjs.js",
   "module": "./dist/index.esm.js",
